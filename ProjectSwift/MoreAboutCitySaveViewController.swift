@@ -127,6 +127,9 @@ class MoreAboutCitySaveViewController: UIViewController {
             buttonGuidedTours.isHidden = true
             buttonTrack.isHidden = true
             buttonAttraction.isHidden = true
+            let alert = UIAlertController(title: "שמור", message: "לא עשית LogIn לכן אי אפשר לגשת לדברים ששמרת", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "הבנתי", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         else{
             let user = Auth.auth().currentUser?.uid
