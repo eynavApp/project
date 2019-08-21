@@ -53,81 +53,86 @@ class DetailsCity: UIViewController,CLLocationManagerDelegate {
 ////        }
 //    }
     func favorite(cell: UITableViewCell)  {
-        
-        guard let indexPathTapped = tableType.indexPath(for: cell) else {return}
-        switch type {
-        case "מסלולים":
-            if searching != nil && searching != "הכל"{
-                let name = listTracksFilter[indexPathTapped.row].track.Name
-                for i in 0..<listTracksFavorites.count{
-                    if listTracksFavorites[i].track.Name == name{
-                        let hasFavorites = listTracksFavorites[i].hasFavorited
-                        listTracksFavorites[i].hasFavorited = !hasFavorites
-                        listTracksFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+         if Auth.auth().currentUser?.uid == nil{
+            let alert = UIAlertController(title: "לשמור למועדפים", message: "לא עשית LogIn", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "הבנתי", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            guard let indexPathTapped = tableType.indexPath(for: cell) else {return}
+            switch type {
+            case "מסלולים":
+                if searching != nil && searching != "הכל"{
+                    let name = listTracksFilter[indexPathTapped.row].track.Name
+                    for i in 0..<listTracksFavorites.count{
+                        if listTracksFavorites[i].track.Name == name{
+                            let hasFavorites = listTracksFavorites[i].hasFavorited
+                            listTracksFavorites[i].hasFavorited = !hasFavorites
+                            listTracksFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+                        }
                     }
                 }
-            }
-            else{
-                let tracksFavorite = listTracksFavorites[indexPathTapped.row]
-                print(tracksFavorite)
-                let hasFavorites = tracksFavorite.hasFavorited
-                listTracksFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
-            }
-        case "אוכל":
-            if searching != nil && searching != "הכל" {
-                let name = listFoodFilter[indexPathTapped.row].food.Name
-                for i in 0..<listFoodFavorites.count{
-                    if listFoodFavorites[i].food.Name == name{
-                        let hasFavorites = listFoodFavorites[i].hasFavorited
-                        listFoodFavorites[i].hasFavorited = !hasFavorites
-                        listFoodFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+                else{
+                    let tracksFavorite = listTracksFavorites[indexPathTapped.row]
+                    print(tracksFavorite)
+                    let hasFavorites = tracksFavorite.hasFavorited
+                    listTracksFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
+                }
+            case "אוכל":
+                if searching != nil && searching != "הכל" {
+                    let name = listFoodFilter[indexPathTapped.row].food.Name
+                    for i in 0..<listFoodFavorites.count{
+                        if listFoodFavorites[i].food.Name == name{
+                            let hasFavorites = listFoodFavorites[i].hasFavorited
+                            listFoodFavorites[i].hasFavorited = !hasFavorites
+                            listFoodFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+                        }
                     }
                 }
-            }
-            else{
-                let foodFavorite = listFoodFavorites[indexPathTapped.row]
-                print(foodFavorite)
-                let hasFavorites = foodFavorite.hasFavorited
-                listFoodFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
-            }
-        case "סיורים מודרכים":
-            if searching != nil && searching != "הכל"{
-                let name = listGuidedToursFilter[indexPathTapped.row].guidedTours.Name
-                for i in 0..<listGuidedToursFavorites.count{
-                    if listGuidedToursFavorites[i].guidedTours.Name == name{
-                        let hasFavorites = listGuidedToursFavorites[i].hasFavorited
-                        listGuidedToursFavorites[i].hasFavorited = !hasFavorites
-                        listGuidedToursFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+                else{
+                    let foodFavorite = listFoodFavorites[indexPathTapped.row]
+                    print(foodFavorite)
+                    let hasFavorites = foodFavorite.hasFavorited
+                    listFoodFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
+                }
+            case "סיורים מודרכים":
+                if searching != nil && searching != "הכל"{
+                    let name = listGuidedToursFilter[indexPathTapped.row].guidedTours.Name
+                    for i in 0..<listGuidedToursFavorites.count{
+                        if listGuidedToursFavorites[i].guidedTours.Name == name{
+                            let hasFavorites = listGuidedToursFavorites[i].hasFavorited
+                            listGuidedToursFavorites[i].hasFavorited = !hasFavorites
+                            listGuidedToursFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+                        }
                     }
                 }
-            }
-            else{
-                let guidedToursFavorite = listGuidedToursFavorites[indexPathTapped.row]
-                print(guidedToursFavorite)
-                let hasFavorites = guidedToursFavorite.hasFavorited
-                listGuidedToursFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
-            }
-        default:
-            if searching != nil && searching != "הכל" {
-                let name = listAttractionsFilter[indexPathTapped.row].attraction.Name
-                for i in 0..<listAttractionsFavorites.count{
-                    if listAttractionsFavorites[i].attraction.Name == name{
-                        let hasFavorites = listAttractionsFavorites[i].hasFavorited
-                        listAttractionsFavorites[i].hasFavorited = !hasFavorites
-                        listAttractionsFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+                else{
+                    let guidedToursFavorite = listGuidedToursFavorites[indexPathTapped.row]
+                    print(guidedToursFavorite)
+                    let hasFavorites = guidedToursFavorite.hasFavorited
+                    listGuidedToursFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
+                }
+            default:
+                if searching != nil && searching != "הכל" {
+                    let name = listAttractionsFilter[indexPathTapped.row].attraction.Name
+                    for i in 0..<listAttractionsFavorites.count{
+                        if listAttractionsFavorites[i].attraction.Name == name{
+                            let hasFavorites = listAttractionsFavorites[i].hasFavorited
+                            listAttractionsFavorites[i].hasFavorited = !hasFavorites
+                            listAttractionsFilter[indexPathTapped.row].hasFavorited = !hasFavorites
+                        }
                     }
                 }
+                else{
+                    let attractionsFavorite = listAttractionsFavorites[indexPathTapped.row]
+                    print(attractionsFavorite)
+                    let hasFavorites = attractionsFavorite.hasFavorited
+                    listAttractionsFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
+
+                }
+
             }
-            else{
-                let attractionsFavorite = listAttractionsFavorites[indexPathTapped.row]
-                print(attractionsFavorite)
-                let hasFavorites = attractionsFavorite.hasFavorited
-                listAttractionsFavorites[indexPathTapped.row].hasFavorited = !hasFavorites
-                
-            }
-            
-        }
-        tableType.reloadRows(at: [indexPathTapped], with: .fade)
+            tableType.reloadRows(at: [indexPathTapped], with: .fade)
+         }
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "searching" {
