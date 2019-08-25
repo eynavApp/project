@@ -474,33 +474,63 @@ class OneTypeViewController: UIViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "MoreAboutCity", bundle:nil)
         
         let secondViewController = storyBoard.instantiateViewController(withIdentifier: "MapScreenId") as! MapScreen
-        if attraction != nil{
+         if attraction != nil{
             var listAttractionsOne = [Attractions]()
             listAttractionsOne.append(attraction!)
             let placesData = try! JSONEncoder().encode(listAttractionsOne)
             UserDefaults.standard.set(placesData, forKey: "listAttractions")
-            secondViewController.listAttractions = listAttractionsOne
+            var list = OneTypeViewController.listAttractions
+            
+            for i in 0..<list.count{
+                if list[i].Name == attraction?.Name{
+                    secondViewController.index = i
+                }
+            }
+            secondViewController.listAttractions = OneTypeViewController.listAttractions
         }
         if food != nil{
             var listFoodOne = [Food]()
             listFoodOne.append(food!)
             let placesData = try! JSONEncoder().encode(listFoodOne)
             UserDefaults.standard.set(placesData, forKey: "listFood")
-            secondViewController.listFood = listFoodOne
+            var list = OneTypeViewController.listFood
+            
+            for i in 0..<list.count{
+                if list[i].Name == food?.Name{
+                    secondViewController.index = i
+                }
+            }
+            secondViewController.listFood = OneTypeViewController.listFood
         }
         if track != nil{
             var listTracksOne = [Tracks]()
             listTracksOne.append(track!)
             let placesData = try! JSONEncoder().encode(listTracksOne)
             UserDefaults.standard.set(placesData, forKey: "listTracks")
-            secondViewController.listTracks = listTracksOne
+            var list = OneTypeViewController.listTracks
+            
+            for i in 0..<list.count{
+                if list[i].Name == track?.Name{
+                    secondViewController.index = i
+                }
+            }
+            secondViewController.listTracks = OneTypeViewController.listTracks
         }
         if guidedTours != nil{
             var listGuidedToursOne = [GuidedTours]()
             listGuidedToursOne.append(guidedTours!)
             let placesData = try! JSONEncoder().encode(listGuidedToursOne)
             UserDefaults.standard.set(placesData, forKey: "listGuidedTours")
-            secondViewController.listGuidedTours = listGuidedToursOne
+            
+//            secondViewController.listGuidedTours = listGuidedToursOne
+            var list = OneTypeViewController.listGuidedTours
+            
+            for i in 0..<list.count{
+                if list[i].Name == guidedTours?.Name{
+                    secondViewController.index = i
+                }
+            }
+            secondViewController.listGuidedTours = OneTypeViewController.listGuidedTours
         }
         self.present(secondViewController, animated:true, completion:nil)
     }
