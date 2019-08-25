@@ -175,9 +175,9 @@ class LoginViewController: BaseViewController ,GIDSignInUIDelegate{
     }
     let googleButton :UIButton = {
         let button = UIButton()
+        button.backgroundColor = UIColor.black
         button.setTitle("logIn Google", for: .normal)
-        button.tintColor = UIColor.white
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         return button
         }()
    
