@@ -18,6 +18,7 @@ class MapScreen: UIViewController {
     var listTracks = [Tracks]()
     var listGuidedTours = [GuidedTours]()
     var listFood = [Food]()
+    var index: Int?
     @IBAction func mapType(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -130,74 +131,138 @@ class MapScreen: UIViewController {
         UserDefaults.standard.addObserver(self, forKeyPath: "select", options: .new, context: nil)
         checkLocationServices()
         
-        if listAttractions.count > 0 {
-            
-            //לעשות זום למיקום
-            changeRegion(location: listAttractions[0].location)
-            for attractions in listAttractions{
-            let cl2d = attractions.location.coordinate
-            
-            //להראות מרקר
-            let annotation = PlaceAnnotation(title: attractions.Name,
-                                             subtitle: attractions.Address,
-                                             coordinate: cl2d)
-            MapView.addAnnotation(annotation)
+       if listAttractions.count > 0 {
+            if index != nil{
                 
-               
+                //לעשות זום למיקום
+                changeRegion(location: listAttractions[index!].location)
+                let cl2d = listAttractions[index!].location.coordinate
+                    
+                    //להראות מרקר
+                let annotation = PlaceAnnotation(title: listAttractions[index!].Name,
+                                                 subtitle: listAttractions[index!].Address,
+                                                     coordinate: cl2d)
+                    MapView.addAnnotation(annotation)
+            }else{
                 
+                //לעשות זום למיקום
+                changeRegion(location: listAttractions[0].location)
+                for attractions in listAttractions{
+                    let cl2d = attractions.location.coordinate
+                    
+                    //להראות מרקר
+                    let annotation = PlaceAnnotation(title: attractions.Name,
+                                                     subtitle: attractions.Address,
+                                                     coordinate: cl2d)
+                    MapView.addAnnotation(annotation)
+                    
+                    
+                    
+                }
             }
+        
         }
         if listGuidedTours.count > 0{
-            
-            //לעשות זום למיקום
-            changeRegion(location: listGuidedTours[0].location)
-            
-            for guidedTours in listGuidedTours{
-            let cl2d = guidedTours.location.coordinate
-            
-            //להראות מרקר
-            let annotation = PlaceAnnotation(title: guidedTours.Name,
-                                             subtitle: guidedTours.Address,
-                                             coordinate: cl2d)
-            
-            MapView.addAnnotation(annotation)
+            if index != nil{
+                
+                //לעשות זום למיקום
+                changeRegion(location: listGuidedTours[index!].location)
+                
+                    let cl2d = listGuidedTours[index!].location.coordinate
+                    
+                    //להראות מרקר
+                    let annotation = PlaceAnnotation(title: listGuidedTours[index!].Name,
+                                                     subtitle: listGuidedTours[index!].Address,
+                                                     coordinate: cl2d)
+                    
+                    MapView.addAnnotation(annotation)
             }
+            else{
+                
+                //לעשות זום למיקום
+                changeRegion(location: listGuidedTours[0].location)
+                
+                for guidedTours in listGuidedTours{
+                    let cl2d = guidedTours.location.coordinate
+                    
+                    //להראות מרקר
+                    let annotation = PlaceAnnotation(title: guidedTours.Name,
+                                                     subtitle: guidedTours.Address,
+                                                     coordinate: cl2d)
+                    
+                    MapView.addAnnotation(annotation)
+                }
+            }
+           
         }
         if listFood.count > 0{
-            //לעשות זום למיקום
-
-            changeRegion(location: listFood[0].location)
-            
-            for food in listFood{
-
-                let cl2d = food.location.coordinate
+            if index != nil{
                 
-                //להראות מרקר
-                let annotation = PlaceAnnotation(title: food.Name,
-                                                 subtitle: food.Address,
-                                                 coordinate: cl2d)
+                changeRegion(location: listFood[index!].location)
                 
-            
-                MapView.addAnnotation(annotation)
+                
+                    let cl2d = listFood[index!].location.coordinate
+                    
+                    //להראות מרקר
+                    let annotation = PlaceAnnotation(title: listFood[index!].Name,
+                                                     subtitle: listFood[index!].Address,
+                                                     coordinate: cl2d)
+                    
+                    
+                    MapView.addAnnotation(annotation)
+            }else{
+                
+                changeRegion(location: listFood[0].location)
+                
+                for food in listFood{
+                    
+                    let cl2d = food.location.coordinate
+                    
+                    //להראות מרקר
+                    let annotation = PlaceAnnotation(title: food.Name,
+                                                     subtitle: food.Address,
+                                                     coordinate: cl2d)
+                    
+                    
+                    MapView.addAnnotation(annotation)
+                }
             }
             
         }
         if listTracks.count > 0 {
-            
-            //לעשות זום למיקום
-            changeRegion(location: listTracks[0].location)
-            
-            for track in listTracks{
+            if index != nil{
                 
-            let cl2d = track.location.coordinate
-            
-            //להראות מרקר
-            let annotation = PlaceAnnotation(title: track.Name,
-                                             subtitle: track.Address,
-                                             coordinate: cl2d)
-            
-            MapView.addAnnotation(annotation)
-//               MapView.deselectAnnotation(annotation, animated: false)
+                //לעשות זום למיקום
+                changeRegion(location: listTracks[index!].location)
+                
+                
+                    let cl2d = listTracks[index!].location.coordinate
+                    
+                    //להראות מרקר
+                    let annotation = PlaceAnnotation(title: listTracks[index!].Name,
+                                                     subtitle: listTracks[index!].Address,
+                                                     coordinate: cl2d)
+                    
+                    MapView.addAnnotation(annotation)
+                    //               MapView.deselectAnnotation(annotation, animated: false)
+            }else
+            {
+                
+                //לעשות זום למיקום
+                changeRegion(location: listTracks[0].location)
+                
+                for track in listTracks{
+                    
+                    let cl2d = track.location.coordinate
+                    
+                    //להראות מרקר
+                    let annotation = PlaceAnnotation(title: track.Name,
+                                                     subtitle: track.Address,
+                                                     coordinate: cl2d)
+                    
+                    MapView.addAnnotation(annotation)
+                    //               MapView.deselectAnnotation(annotation, animated: false)
+                }
             }
         }
     }
