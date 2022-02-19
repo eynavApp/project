@@ -65,4 +65,4 @@
 <img width="400" alt="Activity_information" src="https://user-images.githubusercontent.com/52885580/154805829-ecd29ae3-5728-4174-b7d1-c6678d31bb23.png">
 
 ## App video:
-[<img width="149" alt="video_swift" src="https://user-images.githubusercontent.com/52885580/154805928-41421b13-12c0-45ff-815e-193a18bd8f7c.png">](https://drive.google.com/open?id=1VG0Kmsyx24xHMfipZ8H6lzuEC-ay6KNr)
+[<img width="400" alt="video_swift" src="https://user-images.githubusercontent.com/52885580/154805928-41421b13-12c0-45ff-815e-193a18bd8f7c.png">](https://drive.google.com/open?id=1VG0Kmsyx24xHMfipZ8H6lzuEC-ay6KNr)
